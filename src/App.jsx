@@ -55,6 +55,7 @@ function App() {
       <div className="searchDiv">
         <input
           className="searchBox"
+          type="text"
           placeholder="Search for countries..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
