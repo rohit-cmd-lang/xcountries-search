@@ -9,15 +9,13 @@ function App() {
 
   const fetchCountries = async () => {
     try {
-      const res = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,flags"
-      );
+      const res = await fetch("https://restcountries.com/v3.1/all");
 
       const data = await res.json();
       console.log(data);
       setCountries(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
