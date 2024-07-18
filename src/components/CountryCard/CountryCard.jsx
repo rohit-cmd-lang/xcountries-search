@@ -1,8 +1,8 @@
-import styles from "./CountryCard.module.css";
+import "./CountryCard.css";
 const CountryCard = ({ name, flag }) => {
   return (
-    <div className={styles.countryCard}>
-      <img src={flag} alt={"Flag of " + name} className={styles.flag} />
+    <div className="countryCard">
+      <img src={flag} alt={"Flag of " + name} className="flag" />
       <p>{name}</p>
     </div>
   );

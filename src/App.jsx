@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import styles from "./App.module.css";
+import "./App.css";
 import CountryCard from "./components/CountryCard/CountryCard";
 
 function App() {
@@ -9,7 +9,9 @@ function App() {
 
   const fetchCountries = async () => {
     try {
-      const res = await fetch("https://restcountries.com/v3.1/all");
+      const res = await fetch(
+        "https://restcountries.com/v3.1/all?fields=name,flags"
+      );
 
       const data = await res.json();
       console.log(data);
@@ -24,7 +26,10 @@ function App() {
       const res = await fetch(`https://restcountries.com/v3.1/name/${name}`);
       const data = await res.json();
       if (Array.isArray(data)) {
-        setCountries(data);
+        const filteredData = data.filter((country) =>
+          country.name.common.toLowerCase().includes(name.toLowerCase())
+        );
+        setCountries(filteredData);
       } else {
         setCountries([]);
       }
@@ -33,26 +38,13 @@ function App() {
     }
   };
 
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  };
-
-  const debouncedSearch = debounce(performSearch, 500);
   useEffect(() => {
     fetchCountries();
   }, []);
 
   useEffect(() => {
     if (searchText) {
-      debouncedSearch(searchText);
+      performSearch(searchText);
     } else {
       fetchCountries();
     }
@@ -60,15 +52,15 @@ function App() {
 
   return (
     <>
-      <div className={styles.searchDiv}>
+      <div className="searchDiv">
         <input
-          className={styles.searchBox}
+          className="searchBox"
           placeholder="Search for countries..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
       </div>
-      <div className={styles.grid}>
+      <div className="grid">
         {countries.map((country, i) => (
           <CountryCard
             key={i}
