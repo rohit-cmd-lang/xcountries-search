@@ -1,0 +1,23 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem auto;
+  gap: 1rem;
+}
+
+.searchBox {
+  width: 700px;
+  border: 2px solid lightgrey;
+  height: 1.75rem;
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.searchDiv {
+  height: 3rem;
+  box-shadow: 0 2px 5px lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
